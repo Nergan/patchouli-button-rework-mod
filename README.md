@@ -22,9 +22,9 @@ The release workflow builds the mod and fetches the companion jars from Modrinth
 
 ## What it does
 
-- Adds one Patchouli book, the Guide Book, that lists every other loaded Patchouli book as a clickable icon inside the book itself. Critters and Crawlers' field guide is included too, even though that mod does not use Patchouli.
+- Adds one Patchouli book, the Guide Book, that lists every other loaded Patchouli book as a clickable icon inside the book itself. Critters and Crawlers' field guide and the More Critters atlas are included too, even though those mods do not use Patchouli.
 - The book is crafted from four vanilla books in a 2×2 square. With **Give the compendium book on first join** on (the default), each player receives it once.
-- With **Clear starter guide books** on (the default), `patchouli:guide_book` items and the Critters and Crawlers field guide that show up during the first five seconds after joining are removed. The Guide Book itself is kept. Books that were already in the inventory at the moment of joining stay there.
+- With **Clear starter guide books** on (the default), `patchouli:guide_book` items, the Critters and Crawlers field guide, and the More Critters atlas that show up during the first five seconds after joining are removed. The Guide Book itself is kept. Books that were already in the inventory at the moment of joining stay there.
 - The survival-inventory button is off by default. Turn on **Show the compendium button in the inventory** to open the same book from the inventory.
 
 ## Requirements

@@ -4,9 +4,9 @@ import com.patchoulibutton.mod.book.CompendiumBook
 import com.patchoulibutton.mod.book.ExternalGuides
 import com.patchoulibutton.mod.network.OpenExternalGuidePayload
 import net.minecraft.client.Minecraft
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
-import net.neoforged.fml.ModList
 import net.neoforged.neoforge.network.PacketDistributor
 import vazkii.patchouli.client.book.BookIcon
 import vazkii.patchouli.client.book.gui.GuiBook
@@ -47,13 +47,12 @@ object CompendiumIcons {
                     CompendiumReturn.openPatchouli(book.id)
                 }
             }
-        if (ModList.get().isLoaded("cnc")) {
-            val icon = BookIcon.from(ExternalGuides.CNC_FIELD_GUIDE.toString(), registries)
-            val item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(ExternalGuides.CNC_FIELD_GUIDE)
-            val name = ItemStack(item).hoverName
+        ExternalGuides.loaded().forEach { itemId ->
+            val icon = BookIcon.from(itemId.toString(), registries)
+            val name = ItemStack(BuiltInRegistries.ITEM.get(itemId)).hoverName
             guides += GuideIcon(name, icon) {
                 CompendiumReturn.markExternal()
-                PacketDistributor.sendToServer(OpenExternalGuidePayload(ExternalGuides.CNC_FIELD_GUIDE.toString()))
+                PacketDistributor.sendToServer(OpenExternalGuidePayload(itemId.toString()))
             }
         }
         return guides

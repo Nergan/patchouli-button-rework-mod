@@ -11,7 +11,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent
 import java.util.UUID
 
 /**
- * Снимает книги `patchouli:guide_book` и полевой справочник Critters and Crawlers,
+ * Снимает книги `patchouli:guide_book`, полевой справочник Critters and Crawlers
+ * и атлас More Critters,
  * которые появились в первые [StartingBookSweep.WINDOW_TICKS] тиков после входа.
  * Книга сборки и то, что уже лежало в инвентаре, остаются.
  */
