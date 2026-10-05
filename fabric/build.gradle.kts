@@ -68,6 +68,8 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("fabric_api_version")}")
     modImplementation("net.fabricmc:fabric-language-kotlin:${prop("fabric_kotlin_version")}")
     modImplementation("maven.modrinth:patchouli:${prop("patchouli_fabric_version")}")
+    // Patchouli кладёт Fiber внутрь своего jar. Loom в dev этот вложенный jar не поднимает.
+    modRuntimeOnly("me.zeroeightsix:fiber:0.23.0-2")
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:${prop("cloth_config_version")}")
     modCompileOnly("com.terraformersmc:modmenu:${prop("modmenu_version")}")
 }

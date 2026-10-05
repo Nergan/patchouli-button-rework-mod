@@ -2,23 +2,37 @@
 
 **[English](README.md)** · **[Русский](README.ru.md)**
 
-Порт [PatchouliButton](https://modrinth.com/mod/patchoulibutton) от Globox_Z на **Minecraft 1.21.1** и NeoForge. Написан на Kotlin через [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge).
+Порт [PatchouliButton](https://modrinth.com/mod/patchoulibutton) от Globox_Z на **Minecraft 1.21.1**, NeoForge и Fabric. NeoForge использует [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge). Fabric использует [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin). Ставится один загрузчик, не оба сразу.
 
 Кнопка в инвентаре и экран настроек есть на английском и русском.
 
 ## Загрузки
 
-Jar публикуются в [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) и на [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). Пуш в `main` обновляет файлы текущего релиза.
+Jar публикуются в [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) и на [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). Пуш в `main` обновляет файлы текущего релиза. На Modrinth попадает только jar этого мода.
 
-Скачайте эти файлы и положите в папку `mods`:
+Скачайте один набор и положите эти файлы в папку `mods`.
+
+### NeoForge
 
 | Файл | Нужен | Что это |
 | --- | --- | --- |
-| `patchoulibutton-1.0.0.jar` | Да | этот мод |
+| `patchoulibutton-neoforge-1.21.1-1.0.0.jar` | Да | этот мод |
 | `kotlinforforge-5.8.0-all.jar` | Да | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) |
 | `Patchouli-1.21.1-93-NEOFORGE.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli) |
 
-Workflow релиза собирает мод и забирает два чужих jar с Modrinth. SHA-256 у каждого файла GitHub считает сам и показывает рядом с ним на странице релиза. Файл `*-sources.jar` в `mods` класть не нужно.
+### Fabric
+
+| Файл | Нужен | Что это |
+| --- | --- | --- |
+| `patchoulibutton-fabric-1.21.1-1.0.0.jar` | Да | этот мод |
+| `fabric-api-0.116.17+1.21.1.jar` | Да | [Fabric API](https://modrinth.com/mod/fabric-api). Строка «нужен fabric 0.100.3» означает этот jar, не Fabric Loader |
+| `fabric-language-kotlin-1.13.2+kotlin.2.1.20.jar` | Да | [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) |
+| `Patchouli-1.21.1-93-FABRIC.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli). Fiber уже внутри этого jar, отдельно его ставить не нужно |
+| `cloth-config-15.0.140-fabric.jar` | Да | [Cloth Config](https://modrinth.com/mod/cloth-config), для экрана настроек |
+| `modmenu-11.0.4.jar` | Нет | [Mod Menu](https://modrinth.com/mod/modmenu), открывает экран настроек |
+| `placeholder-api-2.4.2+1.21.jar` | Нет | [Text Placeholder API](https://modrinth.com/mod/placeholder-api), нужен Mod Menu |
+
+Workflow релиза собирает оба jar и забирает чужие jar с Modrinth. SHA-256 у каждого файла GitHub считает сам и показывает рядом с ним на странице релиза. Файл `*-sources.jar` в `mods` класть не нужно.
 
 ## Что делает
 
@@ -29,19 +43,20 @@ Workflow релиза собирает мод и забирает два чуж�
 
 ## Требования
 
-| Компонент | Версия |
-| --- | --- |
-| Minecraft | 1.21.1 |
-| NeoForge | 21.1.209 (подойдёт любой 21.1.x) |
-| Kotlin for Forge | 5.8.0, сборка **NeoForge** |
-| Patchouli | 1.21.1-93 или новее для NeoForge |
-| Java | 21 |
+| Компонент | NeoForge | Fabric |
+| --- | --- | --- |
+| Minecraft | 1.21.1 | 1.21.1 |
+| Загрузчик | NeoForge 21.1.209 | Fabric Loader 0.16.14 или новее |
+| Kotlin | Kotlin for Forge 5.8.0 | Fabric Language Kotlin `1.13.2+kotlin.2.1.20` |
+| Patchouli | `1.21.1-93-neoforge` или новее | `1.21.1-93-fabric` или новее |
+| Ещё | — | Fabric API `0.116.17+1.21.1`, Cloth Config 15.0.140 |
+| Java | 21 | 21 |
 
 Мод нужен и на клиенте, и на сервере.
 
 ## Настройки
 
-В игре: Mods → Patchouli Button Rework → Config.
+На NeoForge: Mods → Patchouli Button Rework → Config. На Fabric тот же экран открывается из Mod Menu.
 
 | Файл | Что задаёт |
 | --- | --- |

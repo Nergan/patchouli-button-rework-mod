@@ -2,23 +2,37 @@
 
 **[English](README.md)** · **[Русский](README.ru.md)**
 
-A **Minecraft 1.21.1** NeoForge port of [PatchouliButton](https://modrinth.com/mod/patchoulibutton) by Globox_Z. Written in Kotlin with [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge).
+A **Minecraft 1.21.1** port of [PatchouliButton](https://modrinth.com/mod/patchoulibutton) by Globox_Z, for NeoForge and Fabric. NeoForge uses [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge). Fabric uses [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin). Install one loader, not both.
 
 The inventory button and the config screen are available in English and Russian.
 
 ## Downloads
 
-Jars are published to [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) and [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). A push to `main` updates the files on the current version’s release.
+Jars are published to [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) and [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). A push to `main` updates the files on the current version’s release. Modrinth receives only this mod’s jar.
 
-Download these files and put them in the `mods` folder:
+Download one set and put those files in the `mods` folder.
+
+### NeoForge
 
 | File | Required | What it is |
 | --- | --- | --- |
-| `patchoulibutton-1.0.0.jar` | Yes | this mod |
+| `patchoulibutton-neoforge-1.21.1-1.0.0.jar` | Yes | this mod |
 | `kotlinforforge-5.8.0-all.jar` | Yes | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) |
 | `Patchouli-1.21.1-93-NEOFORGE.jar` | Yes | [Patchouli](https://modrinth.com/mod/patchouli) |
 
-The release workflow builds the mod and fetches the companion jars from Modrinth. GitHub shows a SHA-256 digest next to each file on the release page. Do not install `*-sources.jar`.
+### Fabric
+
+| File | Required | What it is |
+| --- | --- | --- |
+| `patchoulibutton-fabric-1.21.1-1.0.0.jar` | Yes | this mod |
+| `fabric-api-0.116.17+1.21.1.jar` | Yes | [Fabric API](https://modrinth.com/mod/fabric-api). A message that says "fabric 0.100.3" means this jar, not Fabric Loader |
+| `fabric-language-kotlin-1.13.2+kotlin.2.1.20.jar` | Yes | [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) |
+| `Patchouli-1.21.1-93-FABRIC.jar` | Yes | [Patchouli](https://modrinth.com/mod/patchouli). It already contains Fiber. Do not install Fiber again |
+| `cloth-config-15.0.140-fabric.jar` | Yes | [Cloth Config](https://modrinth.com/mod/cloth-config), for the config screen |
+| `modmenu-11.0.4.jar` | No | [Mod Menu](https://modrinth.com/mod/modmenu), opens the config screen |
+| `placeholder-api-2.4.2+1.21.jar` | No | [Text Placeholder API](https://modrinth.com/mod/placeholder-api), required by Mod Menu |
+
+The release workflow builds both jars and fetches the companion jars from Modrinth. GitHub shows a SHA-256 digest next to each file on the release page. Do not install `*-sources.jar`.
 
 ## What it does
 
@@ -29,19 +43,20 @@ The release workflow builds the mod and fetches the companion jars from Modrinth
 
 ## Requirements
 
-| Component | Version |
-| --- | --- |
-| Minecraft | 1.21.1 |
-| NeoForge | 21.1.209 (any 21.1.x should work) |
-| Kotlin for Forge | 5.8.0, **NeoForge** build |
-| Patchouli | 1.21.1-93 or newer for NeoForge |
-| Java | 21 |
+| Component | NeoForge | Fabric |
+| --- | --- | --- |
+| Minecraft | 1.21.1 | 1.21.1 |
+| Loader | NeoForge 21.1.209 | Fabric Loader 0.16.14 or newer |
+| Kotlin | Kotlin for Forge 5.8.0 | Fabric Language Kotlin `1.13.2+kotlin.2.1.20` |
+| Patchouli | `1.21.1-93-neoforge` or newer | `1.21.1-93-fabric` or newer |
+| Other | — | Fabric API `0.116.17+1.21.1`, Cloth Config 15.0.140 |
+| Java | 21 | 21 |
 
 The mod is required on both client and server.
 
 ## Configuration
 
-In-game: Mods → Patchouli Button Rework → Config.
+On NeoForge: Mods → Patchouli Button Rework → Config. On Fabric the same screen opens from Mod Menu.
 
 | File | What it controls |
 | --- | --- |
