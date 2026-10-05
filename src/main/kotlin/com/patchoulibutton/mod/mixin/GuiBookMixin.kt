@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 import vazkii.patchouli.client.book.gui.GuiBook
 
-@Mixin(GuiBook::class)
+@Mixin(value = [GuiBook::class], remap = false)
 abstract class GuiBookMixin {
-    @Inject(method = ["canSeeBackButton"], at = [At("RETURN")], cancellable = true)
+    @Inject(method = ["canSeeBackButton"], at = [At("RETURN")], cancellable = true, remap = false)
     private fun showCompendiumReturn(callback: CallbackInfoReturnable<Boolean>) {
         if (callback.returnValue) return
         val book = (this as GuiBook).book
@@ -20,7 +20,7 @@ abstract class GuiBookMixin {
         }
     }
 
-    @Inject(method = ["back"], at = [At("HEAD")], cancellable = true)
+    @Inject(method = ["back"], at = [At("HEAD")], cancellable = true, remap = false)
     private fun returnToCompendium(playSound: Boolean, callback: CallbackInfo) {
         val book = (this as GuiBook).book
         if (!CompendiumReturn.pending || book.ownsCompendium()) return

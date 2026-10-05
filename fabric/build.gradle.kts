@@ -36,6 +36,7 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 sourceSets.named("main") {
+    java.srcDir(rootProject.file("src/main/java"))
     resources.srcDir(rootProject.file("src/main/resources"))
 }
 
