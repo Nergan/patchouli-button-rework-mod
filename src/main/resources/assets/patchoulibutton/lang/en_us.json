@@ -6,6 +6,7 @@
   "patchoulibutton.screen.button": "Guide Book",
   "patchoulibutton.screen.back": "Back to guide book",
 
+  "patchoulibutton.configuration.title": "Patchouli Button Rework",
   "patchoulibutton.configuration.books": "Books",
   "patchoulibutton.configuration.books.give_compendium": "Give the compendium book on first join",
   "patchoulibutton.configuration.books.clear_starting_books": "Clear starter guide books",

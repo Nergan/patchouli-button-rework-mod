@@ -31,7 +31,7 @@ version = modVersion
 group = modGroupId
 
 base {
-    archivesName.set(modId)
+    archivesName.set("$modId-neoforge-$minecraftVersion")
 }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))

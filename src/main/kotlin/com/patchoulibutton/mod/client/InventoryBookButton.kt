@@ -1,29 +1,27 @@
 package com.patchoulibutton.mod.client
 
+import com.patchoulibutton.mod.GuideSettings
 import com.patchoulibutton.mod.book.CompendiumBook
-import com.patchoulibutton.mod.config.ClientConfig
 import com.patchoulibutton.mod.mixin.ContainerScreenAccessor
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
-import vazkii.patchouli.common.item.ItemModBook
-import net.neoforged.bus.api.SubscribeEvent
-import net.neoforged.neoforge.client.event.ScreenEvent
 import vazkii.patchouli.api.PatchouliAPI
+import vazkii.patchouli.common.item.ItemModBook
 
 object InventoryBookButton {
     private const val SIZE = 18
 
-    @SubscribeEvent
-    fun onRender(event: ScreenEvent.Render.Post) {
-        if (!ClientConfig.CONFIG.showBookButton.get()) return
-        val screen = event.screen as? InventoryScreen ?: return
-        val accessor = screen as ContainerScreenAccessor
-        val x = accessor.getScreenLeft() + ClientConfig.CONFIG.buttonX.get()
-        val y = accessor.getScreenTop() + ClientConfig.CONFIG.buttonY.get()
-        val graphics = event.guiGraphics
-        val hovered = hit(event.mouseX, event.mouseY, x, y)
+    fun render(screen: Screen, graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        if (!GuideSettings.showBookButton()) return
+        val inventory = screen as? InventoryScreen ?: return
+        val accessor = inventory as ContainerScreenAccessor
+        val x = accessor.getScreenLeft() + GuideSettings.buttonX()
+        val y = accessor.getScreenTop() + GuideSettings.buttonY()
+        val hovered = hit(mouseX, mouseY, x, y)
         if (hovered) {
             graphics.fill(x, y, x + SIZE, y + SIZE, 0x80FFFFFF.toInt())
         }
@@ -32,23 +30,22 @@ object InventoryBookButton {
             graphics.renderTooltip(
                 Minecraft.getInstance().font,
                 Component.translatable("patchoulibutton.screen.button"),
-                event.mouseX,
-                event.mouseY,
+                mouseX,
+                mouseY,
             )
         }
     }
 
-    @SubscribeEvent
-    fun onClick(event: ScreenEvent.MouseButtonPressed.Pre) {
-        if (!ClientConfig.CONFIG.showBookButton.get()) return
-        val screen = event.screen as? InventoryScreen ?: return
-        if (event.button != 0) return
-        val accessor = screen as ContainerScreenAccessor
-        val x = accessor.getScreenLeft() + ClientConfig.CONFIG.buttonX.get()
-        val y = accessor.getScreenTop() + ClientConfig.CONFIG.buttonY.get()
-        if (!hit(event.mouseX.toInt(), event.mouseY.toInt(), x, y)) return
+    fun click(screen: Screen, mouseX: Double, mouseY: Double, button: Int): Boolean {
+        if (!GuideSettings.showBookButton()) return false
+        val inventory = screen as? InventoryScreen ?: return false
+        if (button != 0) return false
+        val accessor = inventory as ContainerScreenAccessor
+        val x = accessor.getScreenLeft() + GuideSettings.buttonX()
+        val y = accessor.getScreenTop() + GuideSettings.buttonY()
+        if (!hit(mouseX.toInt(), mouseY.toInt(), x, y)) return false
         PatchouliAPI.get().openBookGUI(CompendiumBook.ID)
-        event.isCanceled = true
+        return true
     }
 
     private fun bookStack(): ItemStack {

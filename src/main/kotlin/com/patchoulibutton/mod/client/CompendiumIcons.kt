@@ -1,13 +1,12 @@
 package com.patchoulibutton.mod.client
 
+import com.patchoulibutton.mod.GuideSettings
 import com.patchoulibutton.mod.book.CompendiumBook
 import com.patchoulibutton.mod.book.ExternalGuides
-import com.patchoulibutton.mod.network.OpenExternalGuidePayload
 import net.minecraft.client.Minecraft
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
-import net.neoforged.neoforge.network.PacketDistributor
 import vazkii.patchouli.client.book.BookIcon
 import vazkii.patchouli.client.book.gui.GuiBook
 import vazkii.patchouli.client.book.gui.button.GuiButtonCategory
@@ -52,7 +51,7 @@ object CompendiumIcons {
             val name = ItemStack(BuiltInRegistries.ITEM.get(itemId)).hoverName
             guides += GuideIcon(name, icon) {
                 CompendiumReturn.markExternal()
-                PacketDistributor.sendToServer(OpenExternalGuidePayload(itemId.toString()))
+                GuideSettings.sendOpenGuide(itemId.toString())
             }
         }
         return guides

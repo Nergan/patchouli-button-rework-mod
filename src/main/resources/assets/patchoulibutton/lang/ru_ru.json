@@ -6,6 +6,7 @@
   "patchoulibutton.screen.button": "Книга сборки",
   "patchoulibutton.screen.back": "К книге сборки",
 
+  "patchoulibutton.configuration.title": "Patchouli Button Rework",
   "patchoulibutton.configuration.books": "Книги",
   "patchoulibutton.configuration.books.give_compendium": "Выдавать общую книгу сборки на старте",
   "patchoulibutton.configuration.books.clear_starting_books": "Убирать стартовые книги-гайды",

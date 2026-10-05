@@ -3,10 +3,9 @@ package com.patchoulibutton.mod.client
 import com.patchoulibutton.mod.book.CompendiumBook
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.neoforged.bus.api.SubscribeEvent
-import net.neoforged.neoforge.client.event.ScreenEvent
 import vazkii.patchouli.api.PatchouliAPI
 import vazkii.patchouli.client.book.gui.GuiBook
 
@@ -37,9 +36,7 @@ object CompendiumReturn {
         PatchouliAPI.get().openBookGUI(CompendiumBook.ID)
     }
 
-    @SubscribeEvent
-    fun onScreenOpening(event: ScreenEvent.Opening) {
-        val screen = event.newScreen
+    fun onOpening(screen: Screen?) {
         if (screen is GuiBook) {
             external = false
             if (screen.book.ownsCompendium()) pending = false
@@ -51,13 +48,10 @@ object CompendiumReturn {
         }
     }
 
-    @SubscribeEvent
-    fun onScreenInit(event: ScreenEvent.Init.Post) {
-        if (!external || event.screen is GuiBook) return
-        event.addListener(
-            Button.builder(Component.translatable("patchoulibutton.screen.back")) {
-                openCompendium()
-            }.bounds(4, 4, 140, 20).build(),
-        )
+    fun backButton(screen: Screen): Button? {
+        if (!external || screen is GuiBook) return null
+        return Button.builder(Component.translatable("patchoulibutton.screen.back")) {
+            openCompendium()
+        }.bounds(4, 4, 140, 20).build()
     }
 }

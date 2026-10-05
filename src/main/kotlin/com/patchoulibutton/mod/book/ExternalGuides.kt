@@ -1,12 +1,11 @@
 package com.patchoulibutton.mod.book
 
-import com.patchoulibutton.mod.PatchouliButtonMod
+import com.patchoulibutton.mod.GuideSettings
+import com.patchoulibutton.mod.PatchouliButton
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.LevelAccessor
-import net.neoforged.fml.ModList
-
 /**
  * Гайды, которые не являются книгами Patchouli, но должны попасть в книгу сборки
  * и в зачистку стартовых книг.
@@ -43,9 +42,9 @@ object ExternalGuides {
             )
             method.invoke(null, player.level(), player.x, player.y, player.z, player)
         } catch (exception: ReflectiveOperationException) {
-            PatchouliButtonMod.LOGGER.warn("Could not open guide {}", id, exception)
+            PatchouliButton.LOGGER.warn("Could not open guide {}", id, exception)
         }
     }
 
-    private fun Guide.present(): Boolean = ModList.get().isLoaded(modId)
+    private fun Guide.present(): Boolean = GuideSettings.isModLoaded(modId)
 }

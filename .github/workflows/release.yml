@@ -68,7 +68,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.10"
+          gradle-version: "8.11"
 
       - name: Build and test
         run: gradle build --stacktrace
@@ -89,7 +89,7 @@ jobs:
               *) cp -v "${jar}" release-assets/ ;;
             esac
           done
-          test -f "release-assets/patchoulibutton-${{ steps.versions.outputs.mod_version }}.jar"
+          test -f "release-assets/patchoulibutton-neoforge-1.21.1-${{ steps.versions.outputs.mod_version }}.jar"
           chmod +x .github/scripts/fetch-companion-jars.sh
           .github/scripts/fetch-companion-jars.sh \
             release-assets \
@@ -137,25 +137,37 @@ jobs:
 
             | File | Required | Source |
             | --- | --- | --- |
-            | `patchoulibutton-${{ steps.versions.outputs.mod_version }}.jar` | Yes | this mod |
+            | `patchoulibutton-neoforge-1.21.1-${{ steps.versions.outputs.mod_version }}.jar` | Yes | this mod |
             | `kotlinforforge-${{ steps.versions.outputs.kff_version }}-all.jar` | Yes | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) (LGPL-2.1) |
             | `Patchouli-*-NEOFORGE.jar` | Yes | [Patchouli](https://modrinth.com/mod/patchouli) (CC-BY-NC-SA-3.0) |
 
             Do not install `*-sources.jar`. Companion jars are official Modrinth builds, rehosted here for a one-page install. Patchouli is redistributed for non-commercial use with attribution to VazkiiMods. GitHub shows a SHA-256 digest next to each uploaded file.
 
       - name: Check Modrinth token
+        id: modrinth_token
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
           set -euo pipefail
           if [[ -z "${MODRINTH_TOKEN}" ]]; then
-            echo "Secret MODRINTH_TOKEN is missing or empty on this repository."
-            echo "GitHub → Settings → Secrets and variables → Actions → New repository secret."
-            echo "Name must be exactly MODRINTH_TOKEN. Without it mc-publish skips Modrinth and still exits 0."
-            exit 1
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "MODRINTH_TOKEN is empty. Modrinth publish will be skipped."
+            exit 0
           fi
+          echo "present=true" >> "$GITHUB_OUTPUT"
+
+      - name: Replace Modrinth versions
+        if: steps.modrinth_token.outputs.present == 'true'
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/replace-modrinth-versions.py \
+            patchouli-button-neoforge-port \
+            "${{ steps.versions.outputs.mod_version }}"
 
       - name: Publish Modrinth
+        if: steps.modrinth_token.outputs.present == 'true'
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: patchouli-button-neoforge-port
@@ -172,10 +184,18 @@ jobs:
             1.21.1
           java: |
             21
-          files: release-assets/patchoulibutton-${{ steps.versions.outputs.mod_version }}.jar
+          files: release-assets/patchoulibutton-neoforge-1.21.1-${{ steps.versions.outputs.mod_version }}.jar
           dependencies: |
             kotlin-for-forge(required){modrinth:ordsPcFz}
             patchouli(required){modrinth:nU0bVIaL}
+
+      - name: Delete replaced Modrinth versions
+        if: steps.modrinth_token.outputs.present == 'true'
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/replace-modrinth-versions.py --finish release-assets/modrinth-delete-after-publish.txt
 
       - name: Set up Node.js
         if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
@@ -203,7 +223,7 @@ jobs:
             fi
             printf '%s\n' "${matches[0]}"
           }
-          mod_jar="$(one 'release-assets/patchoulibutton-*.jar')"
+          mod_jar="$(one 'release-assets/patchoulibutton-neoforge-1.21.1-*.jar')"
           kff_jar="$(one 'release-assets/kotlinforforge-*.jar')"
           patchouli_jar="$(one 'release-assets/Patchouli-*.jar')"
           node scripts/mcns-release.mjs patchouli-button-rework-mod auto \

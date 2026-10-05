@@ -2,6 +2,7 @@ package com.patchoulibutton.mod.event
 
 import com.patchoulibutton.mod.book.CompendiumBook
 import com.patchoulibutton.mod.network.OpenExternalGuidePayload
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.item.CreativeModeTabs
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.IEventBus
@@ -26,7 +27,12 @@ object ModSetup {
         event.registrar("1").playToServer(
             OpenExternalGuidePayload.TYPE,
             OpenExternalGuidePayload.STREAM_CODEC,
-            OpenExternalGuidePayload::handle,
+            { payload, context ->
+                context.enqueueWork {
+                    val player = context.player() as? ServerPlayer ?: return@enqueueWork
+                    OpenExternalGuidePayload.handle(payload, player)
+                }
+            },
         )
     }
 

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "patchoulibutton",
+  "version": "${version}",
+  "name": "Patchouli Button Rework",
+  "description": "Every mod guide gathered into one book.",
+  "authors": ["Globox_Z", "Patchouli Button contributors"],
+  "license": "MPL-2.0",
+  "icon": "logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.patchoulibutton.mod.loader.fabric.PatchouliButtonFabric"],
+    "client": ["com.patchoulibutton.mod.loader.fabric.PatchouliButtonFabricClient"],
+    "modmenu": ["com.patchoulibutton.mod.loader.fabric.PatchouliButtonModMenu"]
+  },
+  "mixins": ["patchoulibutton.mixins.json", "patchoulibutton.fabric.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.13.2+kotlin.2.1.20",
+    "patchouli": "*",
+    "cloth-config": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

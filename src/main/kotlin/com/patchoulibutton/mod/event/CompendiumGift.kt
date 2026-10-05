@@ -1,19 +1,18 @@
 package com.patchoulibutton.mod.event
 
+import com.patchoulibutton.mod.GuideSettings
 import com.patchoulibutton.mod.book.CompendiumBook
-import com.patchoulibutton.mod.config.ServerConfig
 import com.patchoulibutton.mod.util.PatchouliGuideItems
 import net.minecraft.server.level.ServerPlayer
-import net.neoforged.bus.api.SubscribeEvent
-import net.neoforged.neoforge.event.entity.player.PlayerEvent
+import net.minecraft.world.entity.player.Player
 import vazkii.patchouli.common.item.ItemModBook
 
 object CompendiumGift {
-    @SubscribeEvent
-    fun onLogin(event: PlayerEvent.PlayerLoggedInEvent) {
-        val player = event.entity as? ServerPlayer ?: return
-        if (!ServerConfig.CONFIG.giveCompendium.get()) return
-        val data = player.persistentData
+    lateinit var dataOf: (Player) -> net.minecraft.nbt.CompoundTag
+
+    fun onLogin(player: ServerPlayer) {
+        if (!GuideSettings.giveCompendium()) return
+        val data = dataOf(player)
         if (data.getBoolean(CompendiumBook.GIVEN_FLAG)) return
         if (!PatchouliGuideItems.hasCompendium(player)) {
             val stack = ItemModBook.forBook(CompendiumBook.ID)
@@ -25,9 +24,8 @@ object CompendiumGift {
         data.putBoolean(CompendiumBook.GIVEN_FLAG, true)
     }
 
-    @SubscribeEvent
-    fun onClone(event: PlayerEvent.Clone) {
-        if (!event.original.persistentData.getBoolean(CompendiumBook.GIVEN_FLAG)) return
-        event.entity.persistentData.putBoolean(CompendiumBook.GIVEN_FLAG, true)
+    fun onClone(original: Player, clone: Player) {
+        if (!dataOf(original).getBoolean(CompendiumBook.GIVEN_FLAG)) return
+        dataOf(clone).putBoolean(CompendiumBook.GIVEN_FLAG, true)
     }
 }

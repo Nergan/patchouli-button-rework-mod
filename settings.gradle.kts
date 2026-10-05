@@ -1,6 +1,10 @@
 pluginManagement {
     repositories {
         maven {
+            name = "Fabric"
+            url = uri("https://maven.fabricmc.net/")
+        }
+        maven {
             name = "NeoForged"
             url = uri("https://maven.neoforged.net/releases")
         }
@@ -20,6 +24,14 @@ plugins {
 dependencyResolutionManagement {
     repositories {
         maven {
+            name = "Fabric"
+            url = uri("https://maven.fabricmc.net/")
+        }
+        maven {
+            name = "Minecraft libraries"
+            url = uri("https://libraries.minecraft.net/")
+        }
+        maven {
             name = "NeoForged"
             url = uri("https://maven.neoforged.net/releases")
         }
@@ -32,3 +44,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "patchoulibutton"
+include("fabric")
