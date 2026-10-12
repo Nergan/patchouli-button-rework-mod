@@ -8,7 +8,7 @@
 
 ## Загрузки
 
-Jar публикуются в [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) и на [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). Пуш в `main` обновляет файлы текущего релиза. На Modrinth попадает только jar этого мода.
+Jar публикуются в [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) и на [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). Пуш в `main` обновляет страницу GitHub Release для каждого загрузчика. На странице есть `all-jars.zip`. На Modrinth попадает только jar этого мода.
 
 Скачайте один набор и положите эти файлы в папку `mods`.
 

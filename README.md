@@ -8,7 +8,7 @@ The inventory button and the config screen are available in English and Russian.
 
 ## Downloads
 
-Jars are published to [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) and [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). A push to `main` updates the files on the current version’s release. Modrinth receives only this mod’s jar.
+Jars are published to [GitHub Releases](https://github.com/Nergan/patchouli-button-neoforge-port-mod/releases/latest) and [Modrinth](https://modrinth.com/project/patchouli-button-neoforge-port). A push to `main` updates one GitHub Release page per loader. Each page includes `all-jars.zip`. Modrinth receives only this mod’s jar.
 
 Download one set and put those files in the `mods` folder.
 
