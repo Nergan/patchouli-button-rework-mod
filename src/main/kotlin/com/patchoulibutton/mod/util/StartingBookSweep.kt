@@ -6,10 +6,7 @@ package com.patchoulibutton.mod.util
  */
 object StartingBookSweep {
     const val WINDOW_TICKS = 100
-    const val SENGOKU_GUIDE = "sengoku:sengoku_guide"
     const val SENGOKU_GUIDE_LEGACY = "packfixes:sengoku_guide"
-
-    fun keepInInventory(bookId: String): Boolean = bookId == SENGOKU_GUIDE
 
     fun showInCompendium(bookId: String): Boolean = bookId != SENGOKU_GUIDE_LEGACY
 

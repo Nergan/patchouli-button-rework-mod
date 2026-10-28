@@ -16,7 +16,7 @@ Download one set and put those files in the `mods` folder.
 
 | File | Required | What it is |
 | --- | --- | --- |
-| `patchoulibutton-neoforge-1.21.1-1.0.2.jar` | Yes | this mod |
+| `patchoulibutton-neoforge-1.21.1-1.0.3.jar` | Yes | this mod |
 | `kotlinforforge-5.8.0-all.jar` | Yes | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) |
 | `Patchouli-1.21.1-93-NEOFORGE.jar` | Yes | [Patchouli](https://modrinth.com/mod/patchouli) |
 
@@ -24,7 +24,7 @@ Download one set and put those files in the `mods` folder.
 
 | File | Required | What it is |
 | --- | --- | --- |
-| `patchoulibutton-fabric-1.21.1-1.0.2.jar` | Yes | this mod |
+| `patchoulibutton-fabric-1.21.1-1.0.3.jar` | Yes | this mod |
 | `fabric-api-0.116.17+1.21.1.jar` | Yes | [Fabric API](https://modrinth.com/mod/fabric-api). A message that says "fabric 0.100.3" means this jar, not Fabric Loader |
 | `fabric-language-kotlin-1.13.2+kotlin.2.1.20.jar` | Yes | [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) |
 | `Patchouli-1.21.1-93-FABRIC.jar` | Yes | [Patchouli](https://modrinth.com/mod/patchouli). It already contains Fiber. Do not install Fiber again |
@@ -38,7 +38,7 @@ The release workflow builds both jars and fetches the companion jars from Modrin
 
 - Adds one Patchouli book, the Guide Book, that lists every other loaded Patchouli book as a clickable icon inside the book itself. Critters and Crawlers' field guide and the More Critters atlas are included too, even though those mods do not use Patchouli.
 - The book is crafted from four vanilla books in a 2×2 square. With **Give the compendium book on first join** on (the default), each player receives it once.
-- With **Clear starter guide books** on (the default), `patchouli:guide_book` items, the Critters and Crawlers field guide, and the More Critters atlas that show up during the first five seconds after joining are removed. The Guide Book itself is kept, and so is `sengoku:sengoku_guide`. The old id `packfixes:sengoku_guide` still opens, and it is not listed in the Guide Book. Books that were already in the inventory at the moment of joining stay there.
+- With **Clear starter guide books** on (the default), `patchouli:guide_book` items, the Critters and Crawlers field guide, and the More Critters atlas that show up during the first five seconds after joining are removed. The Guide Book itself is kept. `sengoku:sengoku_guide` is removed like the others and opens from the Guide Book. The old id `packfixes:sengoku_guide` still opens, and it is not listed in the Guide Book. Books that were already in the inventory at the moment of joining stay there.
 - The survival-inventory button is off by default. Turn on **Show the compendium button in the inventory** to open the same book from the inventory.
 
 ## Requirements

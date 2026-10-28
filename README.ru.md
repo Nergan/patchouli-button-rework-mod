@@ -16,7 +16,7 @@ Jar публикуются в [GitHub Releases](https://github.com/Nergan/patcho
 
 | Файл | Нужен | Что это |
 | --- | --- | --- |
-| `patchoulibutton-neoforge-1.21.1-1.0.2.jar` | Да | этот мод |
+| `patchoulibutton-neoforge-1.21.1-1.0.3.jar` | Да | этот мод |
 | `kotlinforforge-5.8.0-all.jar` | Да | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) |
 | `Patchouli-1.21.1-93-NEOFORGE.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli) |
 
@@ -24,7 +24,7 @@ Jar публикуются в [GitHub Releases](https://github.com/Nergan/patcho
 
 | Файл | Нужен | Что это |
 | --- | --- | --- |
-| `patchoulibutton-fabric-1.21.1-1.0.2.jar` | Да | этот мод |
+| `patchoulibutton-fabric-1.21.1-1.0.3.jar` | Да | этот мод |
 | `fabric-api-0.116.17+1.21.1.jar` | Да | [Fabric API](https://modrinth.com/mod/fabric-api). Строка «нужен fabric 0.100.3» означает этот jar, не Fabric Loader |
 | `fabric-language-kotlin-1.13.2+kotlin.2.1.20.jar` | Да | [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) |
 | `Patchouli-1.21.1-93-FABRIC.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli). Fiber уже внутри этого jar, отдельно его ставить не нужно |
@@ -38,7 +38,7 @@ Workflow релиза собирает оба jar и забирает чужие
 
 - Добавляет книгу Patchouli «Книга сборки». Внутри неё гайды других модов показаны иконками, и клик открывает выбранную книгу. Полевой справочник Critters and Crawlers и атлас More Critters тоже попадают в сборку, хотя эти моды написаны не на Patchouli.
 - Крафт: четыре обычные книги квадратом 2×2. Настройка **Выдавать общую книгу сборки на старте** включена по умолчанию: каждый игрок получает книгу один раз.
-- Настройка **Убирать стартовые книги-гайды** включена по умолчанию. Предметы `patchouli:guide_book`, полевой справочник Critters and Crawlers и атлас More Critters, которые появляются в первые пять секунд после входа, удаляются. Сама книга сборки остаётся, и `sengoku:sengoku_guide` тоже. Старый id `packfixes:sengoku_guide` по-прежнему открывается и в книгу сборки не попадает. Книги, которые уже лежали в инвентаре в момент входа, не трогаются.
+- Настройка **Убирать стартовые книги-гайды** включена по умолчанию. Предметы `patchouli:guide_book`, полевой справочник Critters and Crawlers и атлас More Critters, которые появляются в первые пять секунд после входа, удаляются. Сама книга сборки остаётся. `sengoku:sengoku_guide` снимается так же, как остальные, и открывается из книги сборки. Старый id `packfixes:sengoku_guide` по-прежнему открывается и в книгу сборки не попадает. Книги, которые уже лежали в инвентаре в момент входа, не трогаются.
 - Кнопка в инвентаре выживания по умолчанию выключена. **Отображать кнопку книги сборки в инвентаре** открывает ту же книгу из инвентаря.
 
 ## Требования

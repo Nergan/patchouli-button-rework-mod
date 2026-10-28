@@ -20,10 +20,14 @@ class StartingBookSweepTest {
     }
 
     @Test
-    fun keepsTheSengokuGuideAndHidesTheOldId() {
-        assertEquals(true, StartingBookSweep.keepInInventory(StartingBookSweep.SENGOKU_GUIDE))
-        assertEquals(false, StartingBookSweep.keepInInventory(StartingBookSweep.SENGOKU_GUIDE_LEGACY))
+    fun sweepsTheSengokuGuideLikeAnyStarterBook() {
+        val current = mapOf("sengoku:sengoku_guide" to 1)
+        assertEquals(current, StartingBookSweep.excess(emptyMap(), current))
+    }
+
+    @Test
+    fun listsTheSengokuGuideAndHidesTheOldId() {
+        assertEquals(true, StartingBookSweep.showInCompendium("sengoku:sengoku_guide"))
         assertEquals(false, StartingBookSweep.showInCompendium(StartingBookSweep.SENGOKU_GUIDE_LEGACY))
-        assertEquals(true, StartingBookSweep.showInCompendium(StartingBookSweep.SENGOKU_GUIDE))
     }
 }
