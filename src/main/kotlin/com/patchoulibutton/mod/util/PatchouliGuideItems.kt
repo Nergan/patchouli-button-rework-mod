@@ -33,6 +33,7 @@ object PatchouliGuideItems {
         if (itemId != guideBookId) return null
         val id = bookId(stack) ?: return guideBookId.toString()
         if (id == CompendiumBook.ID) return null
+        if (StartingBookSweep.keepInInventory(id.toString())) return null
         return id.toString()
     }
 

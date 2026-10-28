@@ -3,6 +3,7 @@ package com.patchoulibutton.mod.client
 import com.patchoulibutton.mod.GuideSettings
 import com.patchoulibutton.mod.book.CompendiumBook
 import com.patchoulibutton.mod.book.ExternalGuides
+import com.patchoulibutton.mod.util.StartingBookSweep
 import net.minecraft.client.Minecraft
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
@@ -39,7 +40,7 @@ object CompendiumIcons {
         val registries = minecraft.level?.registryAccess() ?: return emptyList()
         val guides = ArrayList<GuideIcon>()
         BookRegistry.INSTANCE.books.values
-            .filter { it.id != CompendiumBook.ID }
+            .filter { it.id != CompendiumBook.ID && StartingBookSweep.showInCompendium(it.id.toString()) }
             .sortedBy { it.id.toString() }
             .forEach { book ->
                 guides += GuideIcon(Component.translatable(book.name), book.icon) {
