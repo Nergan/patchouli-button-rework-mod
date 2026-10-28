@@ -16,7 +16,7 @@ Jar публикуются в [GitHub Releases](https://github.com/Nergan/patcho
 
 | Файл | Нужен | Что это |
 | --- | --- | --- |
-| `patchoulibutton-neoforge-1.21.1-1.0.1.jar` | Да | этот мод |
+| `patchoulibutton-neoforge-1.21.1-1.0.2.jar` | Да | этот мод |
 | `kotlinforforge-5.8.0-all.jar` | Да | [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) |
 | `Patchouli-1.21.1-93-NEOFORGE.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli) |
 
@@ -24,7 +24,7 @@ Jar публикуются в [GitHub Releases](https://github.com/Nergan/patcho
 
 | Файл | Нужен | Что это |
 | --- | --- | --- |
-| `patchoulibutton-fabric-1.21.1-1.0.1.jar` | Да | этот мод |
+| `patchoulibutton-fabric-1.21.1-1.0.2.jar` | Да | этот мод |
 | `fabric-api-0.116.17+1.21.1.jar` | Да | [Fabric API](https://modrinth.com/mod/fabric-api). Строка «нужен fabric 0.100.3» означает этот jar, не Fabric Loader |
 | `fabric-language-kotlin-1.13.2+kotlin.2.1.20.jar` | Да | [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) |
 | `Patchouli-1.21.1-93-FABRIC.jar` | Да | [Patchouli](https://modrinth.com/mod/patchouli). Fiber уже внутри этого jar, отдельно его ставить не нужно |

@@ -86,3 +86,44 @@ tasks.processResources {
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
+
+// refmap пишет процессор аннотаций Java, Kotlin-миксинов он не видит.
+// Без этих строк боевой Fabric ищет имя Mojmap, и клиент падает при загрузке класса книги.
+val patchKotlinRefmap by tasks.registering {
+    dependsOn(tasks.named("compileJava"))
+    doLast {
+        val refmap = layout.buildDirectory.file("classes/java/main/${base.archivesName.get()}-refmap.json").get().asFile
+        val slurper = groovy.json.JsonSlurper()
+        @Suppress("UNCHECKED_CAST")
+        val root = slurper.parse(refmap) as MutableMap<String, Any?>
+        val extra = mapOf(
+            "com/patchoulibutton/mod/mixin/GuiBookLandingMixin" to mapOf(
+                "init" to "Lvazkii/patchouli/client/book/gui/GuiBookLanding;method_25426()V",
+                "drawForegroundElements" to "Lvazkii/patchouli/client/book/gui/GuiBookLanding;drawForegroundElements(Lnet/minecraft/class_332;IIF)V",
+                "Lnet/minecraft/client/resources/language/I18n;get(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;" to
+                    "Lnet/minecraft/class_1074;method_4662(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            ),
+        )
+        fun putAll(target: MutableMap<String, Any?>) {
+            for ((mixin, members) in extra) {
+                @Suppress("UNCHECKED_CAST")
+                val current = target[mixin] as? MutableMap<String, Any?> ?: mutableMapOf()
+                current.putAll(members)
+                target[mixin] = current
+            }
+        }
+        @Suppress("UNCHECKED_CAST")
+        val mappings = root["mappings"] as MutableMap<String, Any?>
+        putAll(mappings)
+        @Suppress("UNCHECKED_CAST")
+        val data = root["data"] as MutableMap<String, Any?>
+        @Suppress("UNCHECKED_CAST")
+        val named = data["named:intermediary"] as MutableMap<String, Any?>
+        putAll(named)
+        refmap.writeText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(root)), Charsets.UTF_8)
+    }
+}
+
+tasks.named("classes") {
+    dependsOn(patchKotlinRefmap)
+}
