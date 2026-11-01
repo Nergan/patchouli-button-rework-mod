@@ -2,10 +2,12 @@ package com.patchoulibutton.mod.client
 
 import com.patchoulibutton.mod.GuideSettings
 import com.patchoulibutton.mod.network.OpenExternalGuidePayload
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.ModContainer
+import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.ScreenEvent
 import net.neoforged.neoforge.client.gui.ConfigurationScreen
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory
@@ -26,12 +28,16 @@ object ClientModEvents {
 
     @SubscribeEvent
     fun onRender(event: ScreenEvent.Render.Post) {
+        CompendiumReturn.renderBackButton(event.screen, event.guiGraphics, event.mouseX, event.mouseY, event.partialTick)
         InventoryBookButton.render(event.screen, event.guiGraphics, event.mouseX, event.mouseY)
     }
 
     @SubscribeEvent
     fun onClick(event: ScreenEvent.MouseButtonPressed.Pre) {
-        if (InventoryBookButton.click(event.screen, event.mouseX, event.mouseY, event.button)) {
+        val screen = event.screen
+        if (CompendiumReturn.clickBackButton(screen, event.mouseX, event.mouseY, event.button) ||
+            InventoryBookButton.click(screen, event.mouseX, event.mouseY, event.button)
+        ) {
             event.isCanceled = true
         }
     }
@@ -43,7 +49,11 @@ object ClientModEvents {
 
     @SubscribeEvent
     fun onScreenInit(event: ScreenEvent.Init.Post) {
-        val button = CompendiumReturn.backButton(event.screen) ?: return
-        event.addListener(button)
+        CompendiumReturn.attachBackButton(event.screen)
+    }
+
+    @SubscribeEvent
+    fun onClientTick(@Suppress("UNUSED_PARAMETER") event: ClientTickEvent.Pre) {
+        if (Minecraft.getInstance().screen == null) CompendiumReturn.onNoScreen()
     }
 }

@@ -4,6 +4,6 @@
   "package": "com.patchoulibutton.mod.loader.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": ["GuideDataMixin"],
-  "client": ["ScreenWidgetInvoker"],
+  "client": [],
   "injectors": { "defaultRequire": 1 }
 }
