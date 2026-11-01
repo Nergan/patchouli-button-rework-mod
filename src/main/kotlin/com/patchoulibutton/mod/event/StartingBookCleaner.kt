@@ -7,8 +7,8 @@ import net.minecraft.server.level.ServerPlayer
 import java.util.UUID
 
 /**
- * Снимает книги `patchouli:guide_book`, полевой справочник Critters and Crawlers
- * и атлас More Critters,
+ * Снимает книги `patchouli:guide_book`, полевой справочник Critters and Crawlers,
+ * атлас More Critters и словарь животных Alex's Mobs,
  * которые появились в первые [StartingBookSweep.WINDOW_TICKS] тиков после входа.
  * Книга сборки и то, что уже лежало в инвентаре, остаются.
  */

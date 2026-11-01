@@ -12,8 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import vazkii.patchouli.client.book.gui.GuiBook
 import vazkii.patchouli.client.book.gui.GuiBookLanding
 
-// Процессор аннотаций Kotlin не видит: имена Fabric для init, drawForegroundElements и I18n.get
-// прописаны вручную в patchKotlinRefmap (fabric/build.gradle.kts).
 @Mixin(value = [GuiBookLanding::class], remap = false)
 abstract class GuiBookLandingMixin {
     private fun pages(): GuiBookAccessor = this as GuiBookAccessor

@@ -52,7 +52,11 @@ object CompendiumIcons {
             val name = ItemStack(BuiltInRegistries.ITEM.get(itemId)).hoverName
             guides += GuideIcon(name, icon) {
                 CompendiumReturn.markExternal()
-                GuideSettings.sendOpenGuide(itemId.toString())
+                if (ExternalGuides.opensOnClient(itemId)) {
+                    ExternalGuides.openOnClient(itemId)
+                } else {
+                    GuideSettings.sendOpenGuide(itemId.toString())
+                }
             }
         }
         return guides
